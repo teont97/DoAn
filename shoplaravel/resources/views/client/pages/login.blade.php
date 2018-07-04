@@ -60,16 +60,17 @@ input.lock.active {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    <form name="myform">
+    <form name="myform" action="{!!  route('post.login') !!}" method="post">
+      <input type="hidden" name="_token" value="{!! csrf_token() !!}">
         <div class="modal-body">
           <div class="form-group">
               <div class="row">
                 <label class="text"> Tài Khoản </label>
-               <input type="text" class="user active" value="User name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User name';}" style="margin-left: 30px;" />
+               <input type="text" name="username" class="user active" value="User name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User name';}" style="margin-left: 30px;" />
               </div>
               <div class="row">
                 <label class="text"> Mật Khẩu </label>
-                <input type="password" class="lock active" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" style="margin-left: 30px;"/>
+                <input type="password" name="password" class="lock active" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" style="margin-left: 30px;"/>
               </div>
           </div>
             <div class="forgot">

@@ -12,7 +12,8 @@ class NewsController extends Controller
     	$news=cate_new::all();
         //dd($news);
     	return view('admin.news.add',compact('news'));
-    }
+	}
+
     public function postAdd(Request $request){
     	$this->validate($request,[
     		'txtTitle'=>'required',

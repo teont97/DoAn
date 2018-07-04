@@ -11,7 +11,8 @@
 |
 */
 Route::post('register',['as'=>'post.register','uses'=>'PagesController@PostRegister']);
-Route::post('login',['as'=>'post.login','uses'=>'PagesController@PostLogin']);
+Route::post('postlogin',['as'=>'post.login','uses'=>'PagesController@PostLogin']);
+Route::get('logout-user','PagesController@logoutUser')->name('logoutUser');
 Route::get('add2',['as'=>'cart.add2','uses'=>'ShopingCartController@PostCheckOut']);
 Route::group(['prefix'=>'Cart'],function(){
 	Route::get('add/{id}',['as'=>'cart.add','uses'=>'ShopingCartController@GetAddCart']);
@@ -23,7 +24,7 @@ Route::group(['prefix'=>'Cart'],function(){
 });
 Route::get('/',['as'=>'gethome','uses'=>'homecontroller@gethome']);
 //Route::get('blog',['as'=>'gethome','uses'=>'homecontroller@gethome']);
-
+Route::get('page-login',['as'=>'GetPageLogin','uses'=>'PagesController@GetPagelogin']);
 Route::get('loai-san-pham/{type}',['as'=>'getcate','uses'=>'PagesController@loaisanpham']);
 Route::get('register',['as'=>'Getregister','uses'=>'PagesController@Getregister']);
 Route::get('login',['as'=>'Getlogin','uses'=>'PagesController@Getlogin']);

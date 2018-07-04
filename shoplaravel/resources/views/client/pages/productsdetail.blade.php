@@ -293,7 +293,7 @@
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<input class="dis-none" type="number" name="rating">
+													<input class="dis-none" type="number" name="rating" value="">
 												</span>
 											</div>
 

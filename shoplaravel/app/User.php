@@ -29,4 +29,7 @@ class User extends Authenticatable
     public function tintuc(){
         return $this->hasMany('App\news','post_id','id');
     }
+    public function comment(){
+        return $this->hasMany('App\comments','id_user','id');
+    }
 }

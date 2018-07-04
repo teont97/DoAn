@@ -10,8 +10,9 @@
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
+						@if(!isset($user))
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Help & FAQs
+							Đăng Ký
 						</a>
 <button type="button" class="flex-c-m trans-04 p-lr-25" data-toggle="modal" data-target="#exampleModalCenter"  style="color: #b2b2b2; border-right: 1px solid #b2b2b2;font-family: Poppins-Regular;
     font-size: 12px;
@@ -23,16 +24,17 @@
     		color: #717fe0;
     	}
     </style>
-                        <label> My Account </label>
+                        <label> Đăng Nhập </label>
                          </button>
-
+                         @else
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
+							{!! $user->name !!}
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
+						<a href="{!!  route('logoutUser') !!}" class="flex-c-m trans-04 p-lr-25">
+							Đăng Xuất
 						</a>
+						@endif
 					</div>
 				</div>
 			</div>

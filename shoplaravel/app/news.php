@@ -13,4 +13,7 @@ class news extends Model
     public function users(){
     	return $this->belongsTo('App\User','post_id','id');
     }
+    public function comment(){
+    	return $this->belongsTo('App\comments','id_blog','id');
+    }
 }

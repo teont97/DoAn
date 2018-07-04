@@ -4,6 +4,7 @@ use Illuminate\Support\ServiceProvider;
 use typeproducts;
 use DB;
 use Cart;
+use Illuminate\Support\Facades\Auth;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('client.blocks.header',function($view){
-            $cate=DB::table('type_products')->select('id','name','description')->orderBy('id','DESC')->get();;
+            $cate=DB::table('type_products')->select('id','name','description')->orderBy('id','DESC')->get();
             $view->with('cate',$cate);
         });
         view()->composer('client.blocks.cart',function($view){
@@ -24,6 +25,12 @@ class AppServiceProvider extends ServiceProvider
             $view->with('data_iteam1',$data_iteam1);
             $view->with('data_total',$data_total);
             $view->with('data_sub',$data_sub);
+        });
+        view()->composer('client.blocks.header',function($view){
+            if(Auth::check()){
+                $view->with('user',Auth::user());
+            
+            }
         });
     }
 

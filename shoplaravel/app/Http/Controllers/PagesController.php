@@ -10,6 +10,7 @@ use App\User;
 use Hash;
 use App\news;
 use App\products;
+use Auth;
 class PagesController extends Controller
 {
     public function GetProducts(){
@@ -46,11 +47,15 @@ $product_type= DB::table('products')->select('id','name','id_type','images','uni
     $data_detail=DB::table('tin_tuc')->select('id','title','alias','abbreviate','content','Keywords','images','view','id_cate','id_user','created_at')->where('id',$blog_detail['id'])->first();
     $categories=DB::table('loaitin')->select('id','name')->get();
     $data_products=DB::table('products')->orderByRaw("RAND()")->take(3)->get();
+                if(Auth::check())
+                {
+                    $user=Auth::user();
+                }
     //dd($data_products);
    // dd($categories);
         //dd($data_detail);
         //dd($blog_detail['id']);
-    	return view('client.pages.blog_detail',compact('data_detail','categories','data_products'));
+    	return view('client.pages.blog_detail',compact('data_detail','categories','data_products','user'));
     }
     public function GetContact(){
 
@@ -64,9 +69,9 @@ $product_type= DB::table('products')->select('id','name','id_type','images','uni
         });
         return back()->with(['flash_level'=>'success','flash_messages'=>'Bạn Đã Gửi Thành Công!!!']);
     }
-    /*public function Getlogin(){
-        return view('client.pages.login');
-    }*/
+    public function Getlogin(){
+        return view('client.pages.PagesLogin');
+    }
     public function PostRegister(Request $request){
             $User = new User();
             $User->name = $request->txtname;
@@ -82,7 +87,20 @@ $product_type= DB::table('products')->select('id','name','id_type','images','uni
         return view('client.pages.register');
     }
    public function PostLogin(Request $request){
-
+        $login = array(
+            'email' => $request->username,
+            'password'=> $request->password
+        );
+        if(Auth::attempt($login)){
+            return redirect()->route('gethome');
+        }
+        else{
+            return redirect('login')->with('mesage','Đăng Nhập Không Thành Công . Vui Lòng Đăng Nhập Lại !!! ');
+        }
+   }
+   public function logoutUser(){
+    Auth::logout(); // giúp logout để xóa session . 
+    return redirect()->route('gethome');
    }
    public function searchByProducts(Request $request){
     $result = products::where('name', 'like', '%' . $request->value . '%')->get();
@@ -98,5 +116,9 @@ $product_type= DB::table('products')->select('id','name','id_type','images','uni
         $data_products=DB::table('products')->orderByRaw("RAND()")->take(3)->get();
         return view('client.pages.search_blog',compact('result_news','categories','data_products'));
    }
+   public function PostComment(Request $request){
+
+   }
+
    
 }
